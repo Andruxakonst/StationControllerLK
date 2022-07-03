@@ -1,0 +1,71 @@
+<!-- Page Heading -->
+<div class="mb-4">
+  <h1 class="h3 mb-0 text-gray-800 text-center">{{item}}: {{getedUser.firstname | titlecase}} {{getedUser.lastname | titlecase}} {{getedUser.surname | titlecase}} </h1>
+</div>
+<div class="row">
+    <!-- <div class="col">
+    <p >Активность:
+      <span *ngIf="getedUser.isActive" [ngClass]="{'text-success':getedUser.isActive}">активен</span>
+      <span *ngIf="!getedUser.isActive" [ngClass]="{'text-danger':!getedUser.isActive}">не активен</span>
+    </p>
+    <p>Email: <a href="mailto:{{getedUser.email}}">{{getedUser.email}}</a></p>
+    <p>Телефон: <a href="tel:{{getedUser.phone}}">{{getedUser.phone}}</a></p>
+    <p>Отдел: <span [ngClass]="{'text-primary':getedUser.isActive}">{{getedUser.position}}</span></p>
+    <p>Роли: <span [ngClass]="{'text-primary':getedUser.isActive}">{{getedUser.roles |json}}</span></p>
+    <p>uuid: <span [ngClass]="{'text-primary':getedUser.isActive}">{{getedUser.uuid}}</span></p>
+    <p>Привязанные станции: </p>
+    <ul>
+      <li *ngFor="let station of getedUser.stations">{{station.name}}</li>
+    </ul>
+
+    <hr />
+    <p>Техническая информация: </p>
+    <p>{{getedUser._links | json}}<br/></p>
+  </div> -->
+  <div class="form col border-start">
+
+    <form [formGroup]="userForm" (ngSubmit)="editUser()">
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">ФИО</label>
+        <input type="email" class="form-control" formControlName="FIO" value="{{getedUser.firstname | titlecase}} {{getedUser.lastname | titlecase}} {{getedUser.surname | titlecase}}">
+        <!--<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>-->
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email адрес</label>
+        <input type="email" class="form-control" formControlName="email" value="{{getedUser.email}}">
+        <!--<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>-->
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Номер телефона рабочий</label>
+        <input type="text" class="form-control" formControlName="phoneWork" value="{{getedUser.phoneWork}}">
+        <!--<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>-->
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Номер телефона домашний</label>
+        <input type="text" class="form-control" formControlName="phoneMobile" value="{{getedUser.phoneMobile}}">
+        <!--<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>-->
+      </div>
+
+      <button type="submit" class="btn btn-primary align-self-center">Сохранить</button>
+    </form>
+  </div>
+  <div class="col">
+    <p class="text-center">Роли</p>
+    <ul>
+      <li >{{roles.ROLE_SUPERADMIN}}</li>
+      <li >{{roles.ROLE_ADMIN}}</li>
+      <li >{{roles.ROLE_TECHNOLOGIST}}</li>
+      <li >{{roles.ROLE_MANAGER}}</li>
+      <li >{{roles.ROLE_OPERATOR}}</li>
+    </ul>
+  </div>
+  <div class="col">
+    <p class="text-center">Станции</p>
+  </div>
+
+</div>
+

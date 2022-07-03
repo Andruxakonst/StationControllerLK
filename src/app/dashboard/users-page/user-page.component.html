@@ -1,0 +1,54 @@
+
+<!-- Page Heading -->
+<div class="align-items-center mb-4">
+  <h1 class="h3 mb-0 text-gray-800 text-center" >{{item}}</h1>
+</div>
+<!-- Кнопка добавления нового пользователя.
+  <div class="btn-menu">
+  <a class="btn btn-success btn-sm m-1" [routerLink]="['/dashboard/users-page','users-add' ]">Добавить нового пользователя</a>
+</div>
+-->
+<div class="table-responsive-sm">
+  <table class="table text-center">
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Email</th>
+        <th>Телефоны</th>
+        <th>Отдел</th>
+        <!-- <th>UUID</th> -->
+        <th>Роли</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tr *ngFor="let user of users; let i = index">                                  <!--Перебираем все эдементы массива users-->
+      <td [ngClass]="{'text-primary':user.isActive}">{{i+1}}</td>                   <!--[ngClass]="{'text-primary':user.isActive}" если user.isActive = true то добавляем класс text-primary-->
+      <td [ngClass]="{'text-primary':user.isActive}">{{user.lastname}}</td>
+      <td [ngClass]="{'text-primary':user.isActive}">{{user.firstname}}</td>
+      <td [ngClass]="{'text-primary':user.isActive}">{{user.surname}}</td>
+      <td [ngClass]="{'text-primary':user.isActive}">{{user.email}}</td>
+      <td [ngClass]="{'text-primary':user.isActive}">
+        <a *ngFor="let phone of user.phones"  href="tel:{{phone.number}}">{{phone.name}}: {{phone.number}}<br></a>
+      </td>
+      <td [ngClass]="{'text-primary':user.isActive}">{{user.position}}</td>
+      <!-- <td [ngClass]="{'text-primary':user.isActive}">{{user.uuid}}</td> -->
+      <td [ngClass]="{'text-primary':user.isActive}">{{user.roles |json}}</td>
+      <td>
+        <!-- routerLink третий параметр массива передает uuid в дочерний компонент При клике запускаем функцию togleMSG() для оключения сообщения-->
+        <a class="btn btn-warning btn-sm m-1" irole="button" [routerLink]="['/dashboard/users-page','users-edit', user.uuid]" (click)="togleMSG()">Изменить</a>
+        <a class="btn btn-danger btn-sm m-1" role="button" (click)="delUser(user.uuid)">Удалить</a>
+      </td>
+
+    </tr>
+
+  </table>
+  <hr>
+  <p *ngIf="massage" class="text-primary text-center">{{massage}}</p>
+</div>
+<div class="error_massege" *ngIf="errMassage">{{errMassage}}</div>
+
+<router-outlet></router-outlet>
